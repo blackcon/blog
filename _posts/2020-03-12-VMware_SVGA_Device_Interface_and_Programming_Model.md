@@ -4,15 +4,15 @@ date: 2021-03-12 11:55:00 +0900
 categories: vmware, SVGA
 ---
 
+본 게시글은 vmware에서 제공하는 [vmware-svga](https://github.com/prepare/vmware-svga/blob/master/doc/svga_interface.txt)의 내용입니다.
 
 Copyright (C) 1999-2009 VMware, Inc.
 All Rights Reserved
 Revision 3, 2009-04-12
 
-reference: https://github.com/prepare/vmware-svga/blob/master/doc/svga_interface.txt
 
 Table of Contents:
-
+------------------
   1. Introduction
   2. Examples and Reference Implementation
   3. Virtual Hardware Overview
