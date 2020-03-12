@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "VMware SVGA 장치 인터페이스 및 프로그래밍 모델"
 date: 2021-03-12 11:55:00 +0900
 categories: vmware SVGA
