@@ -3,17 +3,12 @@ title: "VMware SVGA Device Interface and Programming Model"
 date: 2021-03-12 11:55:00 +0900
 categories: vmware SVGA
 ---
-reference: https://github.com/prepare/vmware-svga/blob/master/doc/svga_interface.txt
 
 Copyright (C) 1999-2009 VMware, Inc.
 All Rights Reserved
-
-
-        VMware SVGA Device Interface and Programming Model
-        --------------------------------------------------
-
 Revision 3, 2009-04-12
 
+reference: https://github.com/prepare/vmware-svga/blob/master/doc/svga_interface.txt
 
 Table of Contents:
 
