@@ -9,7 +9,6 @@ Debugging Metalkit Apps
 
 1. .vmx 파일 수정
 vmware의 가상 이미지 설정파일인 .vmx를 editor로 열어서 아래의 내용을 추가해준다.
-
     debugStub.listen.guest32 = "TRUE"
     debugStub.hideBreakpoints = "TRUE"
     monitor.debugOnStartGuest32 = "TRUE"
