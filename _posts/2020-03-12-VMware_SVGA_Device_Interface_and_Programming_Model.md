@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "VMware SVGA 장치 인터페이스 및 프로그래밍 모델"
 date: 2021-03-12 11:55:00 +0900
 categories: vmware SVGA
@@ -34,7 +33,7 @@ virtual hardware. Many new capability flags and FIFO commands have
 been added, and these are sparsely documented in svga_reg.h.
 
 
-1.  Introduction
+1\.  Introduction
 ----------------
 
 This document describes the virtual graphics adapter interface which
@@ -62,7 +61,7 @@ The VMware SVGA device also supports several advanced features:
    - Desktop resizing
 
 
-2.  Examples and Reference Implementation
+2\.  Examples and Reference Implementation
 -----------------------------------------
 
 This document is not yet complete, in that it doesn't describe the
@@ -145,7 +144,7 @@ Header files and reference implementation files in 'lib':
    SVGA3D idioms.
 
 
-3.  Virtual Hardware Overview
+3\.  Virtual Hardware Overview
 -----------------------------
 
 The VMware SVGA Device is a virtual PCI device. It provides the
@@ -263,7 +262,7 @@ refer to regions of system memory which may or may not be physically
 contiguous.
 
 
-4.  2D Graphics Model
+4\.  2D Graphics Model
 ---------------------
 
 Conceptually, the 2D portion of the VMware SVGA device is a compositor
@@ -371,7 +370,7 @@ so using the SVGA_CMD_DEFINE_CURSOR and SVGA_CMD_DISPLAY_CURSOR
 commands.
 
 
-5.  3D Graphics Model
+5\.  3D Graphics Model
 ---------------------
 
 The VMware SVGA device supports hardware-independent accelerated 3D
@@ -415,7 +414,7 @@ To summarize the SVGA3D device's design:
    pipelines.
 
 
-6. Overview of SVGA3D features
+6\. Overview of SVGA3D features
 ------------------------------
 
  * Capabilities
@@ -495,7 +494,7 @@ To summarize the SVGA3D device's design:
       o Similar to drawing with OpenGL vertex arrays and VBOs.
 
 
-7. Programming the VMware SVGA Device
+7\. Programming the VMware SVGA Device
 -------------------------------------
 
 1. Reading/writing a register:
