@@ -6,8 +6,7 @@ categories: vmware, SVGA
 
 본 게시글은 vmware에서 제공하는 [vmware-svga](https://github.com/prepare/vmware-svga/blob/master/doc/debugging.txt)의 내용입니다.
 
-Using VMware's gdb stub, you can get source-level debugging for your
-Metalkit apps.
+Using VMware's gdb stub, you can get source-level debugging for your Metalkit apps.
 
 Add these three config options to your .vmx file:
 
