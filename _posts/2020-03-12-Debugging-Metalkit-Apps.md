@@ -6,19 +6,23 @@ categories: vmware SVGA
 
 Debugging Metalkit Apps
 -----------------------
+본 게시글은 vmware에서 제공하는 [vmware-svga](https://github.com/prepare/vmware-svga/blob/master/doc/debugging.txt)의 내용입니다.
 
-1. .vmx 파일 수정
-vmware의 가상 이미지 설정파일인 .vmx를 editor로 열어서 아래의 내용을 추가해준다.
+Using VMware's gdb stub, you can get source-level debugging for your
+Metalkit apps.
+
+Add these three config options to your .vmx file:
+
     debugStub.listen.guest32 = "TRUE"
     debugStub.hideBreakpoints = "TRUE"
     monitor.debugOnStartGuest32 = "TRUE"
-    
-2. 가상 이미지 실행
-가상 이미지를 실행시키면 bios에 내포되어 있는 실행파일(ELF)이 실행되기 전에 화면이 멈춰있게 된다.
-(.vmx 파일에 디버깅 옵션을 넣어주었기 때문)
 
-3. remote attach
-`조건`: bios에 포함되어 있는 ELF 바이너리를 가지고 있어야 한다.
+Now run your VM. It should hang just after power on, before showing
+the BIOS. If you can see your VM's stdout, you should see a message
+about attaching gdb. Now we can attach gdb. You'll need the .elf file
+which matches the .img you're running in the VM. Metalkit's default
+makefiles compile ELF versions of your binary with full debug symbols.
+
     micah@micah-64:~/metalkit/examples/apm-test$ gdb -q apm-test.elf
     No symbol table is loaded.  Use the "file" command.
     Using host libthread_db library "/lib/libthread_db.so.1".
@@ -33,6 +37,40 @@ vmware의 가상 이미지 설정파일인 .vmx를 editor로 열어서 아래의
     (gdb) cont
     Continuing.
     
- 9. Reference
- - [github - vmware-svga:debugging.txt](https://github.com/prepare/vmware-svga/blob/master/doc/debugging.txt)
- 
+Now you should see the VM boot. If you need to stop earlier, to debug
+the bootloader, you can set a breakpoint at *0x7c00 instead. Usually
+starting at main() is quite sufficient. As soon as Metalkit loads, you
+should hit this breakpoint. From here on, all the normal gdb debug-fu
+should work.
+
+    Breakpoint 1, main () at main.c:11
+    11      {
+    (gdb) list
+    6       #include "keyboard.h"
+    7       #include "apm.h"
+    8
+    9       int
+    10      main(void)
+    11      {
+    12         ConsoleVGA_Init();
+    13         Intr_Init();
+    14         Intr_SetFaultHandlers(Console_UnhandledFault);
+    15         Keyboard_Init();
+    (gdb) next
+    main () at main.c:12
+    12         ConsoleVGA_Init();
+    (gdb)
+    13         Intr_Init();
+    (gdb)
+    14         Intr_SetFaultHandlers(Console_UnhandledFault);
+    (gdb)
+    15         Keyboard_Init();
+    (gdb) p gConsole
+    $1 = {beginPanic = 0x1005ef <ConsoleVGABeginPanic>,
+          clear = 0x1004d2 <ConsoleVGAClear>,
+          moveTo = 0x1004c1 <ConsoleVGAMoveTo>,
+          writeChar = 0x100511 <ConsoleVGAWriteChar>,
+          flush = 0x100482 <ConsoleVGAMoveHardwareCursor>}
+    (gdb)
+
+---
