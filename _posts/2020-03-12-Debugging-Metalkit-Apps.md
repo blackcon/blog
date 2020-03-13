@@ -6,22 +6,17 @@ categories: vmware SVGA
 
 Debugging Metalkit Apps
 -----------------------
-본 게시글은 vmware에서 제공하는 [vmware-svga](https://github.com/prepare/vmware-svga/blob/master/doc/debugging.txt)의 내용입니다.
+이 글은 리눅스의 gdb로 Metalkit을 동적으로 분석할 수 있는 방법을 설명하며, 본 게시글은 vmware에서 제공하는 [vmware-svga](https://github.com/prepare/vmware-svga/blob/master/doc/debugging.txt)의 내용을 나름대로 해석한 글이다.
 
-Using VMware's gdb stub, you can get source-level debugging for your
-Metalkit apps.
-
-Add these three config options to your .vmx file:
+디버깅하고자 하는 vm 이미지의 설정파일(\*.vmx)를 에디터로 오픈해서 아래의 내용을 한다.
 
     debugStub.listen.guest32 = "TRUE"
     debugStub.hideBreakpoints = "TRUE"
     monitor.debugOnStartGuest32 = "TRUE"
 
-Now run your VM. It should hang just after power on, before showing
-the BIOS. If you can see your VM's stdout, you should see a message
-about attaching gdb. Now we can attach gdb. You'll need the .elf file
-which matches the .img you're running in the VM. Metalkit's default
-makefiles compile ELF versions of your binary with full debug symbols.
+이 후, VM 이미지를 실행하면 bios 화면이 뜨기전에 hang이 걸려있게 된다. 
+이번 단계에서 할 것이 gdb를 이용해서 attach를 하는것인데, 
+Metalkit에 심겨져있는 \.elf 파일을 가지고 있어야지 디버깅을 할 수 있다.
 
     micah@micah-64:~/metalkit/examples/apm-test$ gdb -q apm-test.elf
     No symbol table is loaded.  Use the "file" command.
